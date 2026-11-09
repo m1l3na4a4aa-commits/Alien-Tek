@@ -1,212 +1,909 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlienMarket - Seu Petshop Intergaláctico</title>
-    <!-- Tailwind CSS CDN -->
+    <title>AlienMarket 🛸 | A Melhor Loja Intergaláctica do Universo</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Orbitron & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <!-- Arquivo CSS Externo -->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: {
+                            green: '#00ff88',
+                            cyan: '#00f3ff',
+                            purple: '#b537f2',
+                            pink: '#ff007f'
+                        },
+                        space: {
+                            darkest: '#07030e',
+                            darker: '#0f051d',
+                            dark: '#1a0b2e',
+                            card: 'rgba(26, 11, 46, 0.65)',
+                            border: 'rgba(0, 255, 136, 0.2)'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 20px rgba(0, 255, 136, 0.4)',
+                        'neon-purple': '0 0 20px rgba(181, 55, 242, 0.4)',
+                        'neon-cyan': '0 0 20px rgba(0, 243, 255, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Fundo Estelar Animado e Efeitos CSS Customizados */
+        body {
+            background-color: #07030e;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .bg-stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #00ff88, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #b537f2, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #00f3ff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starsMove 100s linear infinite;
+        }
+
+        @keyframes starsMove {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 2000px; }
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(26, 11, 46, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(15, 5, 29, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(181, 55, 242, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 255, 136, 0.6);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px -10px rgba(0, 255, 136, 0.3);
+        }
+
+        /* Texto Neon Glow */
+        .glow-text-green {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6), 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .glow-text-purple {
+            text-shadow: 0 0 10px rgba(181, 55, 242, 0.6), 0 0 20px rgba(181, 55, 242, 0.3);
+        }
+
+        /* Scrollbar Personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07030e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a0b2e;
+            border: 1px solid #00ff88;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00ff88;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 2s infinite;
+        }
+    </style>
 </head>
+<body class="font-sans bg-stars antialiased selection:bg-neon-green selection:text-space-darkest">
 
-<body
-    class="bg-[#0b0517] text-slate-100 font-['Rajdhani'] antialiased overflow-x-hidden selection:bg-[#00ff88] selection:text-black">
-
-    <!-- Fundo Estelar & Grid Futurista -->
-    <div class="fixed inset-0 bg-space-grid pointer-events-none z-0 opacity-40"></div>
-    <div class="fixed top-1/4 left-10 w-96 h-96 bg-[#b537f2]/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-10 right-10 w-96 h-96 bg-[#00ff88]/15 rounded-full blur-[120px] pointer-events-none"></div>
-
-    <!-- Header / Navbar -->
-    <header
-        class="sticky top-0 z-50 backdrop-blur-md bg-[#0b0517]/80 border-b border-[#b537f2]/30 transition-all duration-300">
+    <!-- OVERLAY NAV FIXA & HEADER -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-neon-green/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div
-                    class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00ff88] to-[#b537f2] flex items-center justify-center shadow-[0_0_15px_rgba(0,255,136,0.4)] animate-pulse">
-                    <i class="ph ph-alien text-3xl text-black font-bold"></i>
+            
+            <!-- LOGO -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-neon-purple to-neon-green p-0.5 shadow-neon-green group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-space-darkest rounded-[10px] flex items-center justify-center text-2xl">
+                        🛸
+                    </div>
                 </div>
-                <div>
-                    <span
-                        class="font-['Orbitron'] text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-[#00ff88] via-[#00f3ff] to-[#b537f2]">
-                        AlienMarket
+                <div class="flex flex-col">
+                    <span class="font-orbitron font-black text-xl tracking-wider text-white">
+                        ALIEN<span class="text-neon-green glow-text-green">MARKET</span>
                     </span>
-                    <span class="block text-[10px] text-[#00ff88] tracking-widest uppercase font-mono">v4.0.9
-                        Intergaláctica</span>
+                    <span class="text-[10px] text-neon-cyan tracking-widest uppercase font-mono">Setor 7G • Via Láctea</span>
                 </div>
+            </a>
+
+            <!-- SAUDAÇÃO CENTRAL (DESKTOP) -->
+            <div class="hidden lg:flex items-center gap-2 bg-space-dark/80 px-4 py-1.5 rounded-full border border-neon-purple/30 text-xs">
+                <span class="animate-pulse text-neon-green">●</span>
+                <span class="text-gray-300 font-mono">Oii, viajante das estrelas! 🚀 Bem-vindo(a)!</span>
             </div>
 
-            <!-- Navegação Desktop -->
-            <nav class="hidden md:flex items-center space-x-6 font-semibold text-sm">
-                <a href="#aliens" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-alien text-lg"></i> Aliens</a>
-                <a href="#acessorios" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-t-shirt text-lg"></i> Acessórios</a>
-                <a href="#comidas" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-pizza text-lg"></i> Comidas</a>
-                <a href="#cuidados" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-heartbeat text-lg"></i> Dicas</a>
-                <a href="#sobre" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-book-open text-lg"></i> Sobre</a>
-                <a href="#planetas" class="hover:text-[#00ff88] transition-colors flex items-center gap-1.5"><i
-                        class="ph ph-planet text-lg"></i> Terra Natal</a>
+            <!-- NAVEGAÇÃO DESKTOP -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 font-orbitron text-xs tracking-wider">
+                <a href="#aliens" class="px-3 py-2 rounded-lg text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all flex items-center gap-1.5">
+                    <span>👽</span> Aliens
+                </a>
+                <a href="#acessorios" class="px-3 py-2 rounded-lg text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all flex items-center gap-1.5">
+                    <span>🧢</span> Acessórios
+                </a>
+                <a href="#comidas" class="px-3 py-2 rounded-lg text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all flex items-center gap-1.5">
+                    <span>🍕</span> Comidas
+                </a>
+                <a href="#sobre" class="px-3 py-2 rounded-lg text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all flex items-center gap-1.5">
+                    <span>📖</span> Curiosidades
+                </a>
+                <a href="#planetas" class="px-3 py-2 rounded-lg text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all flex items-center gap-1.5">
+                    <span>🌍</span> Origens
+                </a>
             </nav>
 
-            <!-- Ações -->
-            <div class="flex items-center gap-4">
-                <button id="cartBtn"
-                    class="relative p-2.5 rounded-xl bg-[#1a0b2e] border border-[#b537f2]/50 hover:border-[#00ff88] text-white transition-all hover:scale-105 active:scale-95 shadow-[0_0_10px_rgba(181,55,242,0.2)]">
-                    <i class="ph ph-shopping-bag text-2xl text-[#00ff88]"></i>
-                    <span id="cartCount"
-                        class="absolute -top-2 -right-2 bg-[#b537f2] text-white font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center border border-black">0</span>
+            <!-- BOTAO CARRINHO & MOBILE MENU BTN -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCartModal()" class="relative p-2.5 rounded-xl bg-space-dark border border-neon-green/40 text-neon-green hover:bg-neon-green hover:text-space-darkest transition-all shadow-neon-green/20">
+                    <i class="ph ph-shopping-bag text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-neon-pink text-white font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-space-dark border border-neon-purple/40 text-neon-purple hover:text-white">
+                    <i class="ph ph-list text-2xl"></i>
                 </button>
             </div>
         </div>
+
+        <!-- MENU MOBILE BANNER -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-neon-purple/20 px-4 pt-2 pb-6 space-y-3 font-orbitron text-sm">
+            <div class="p-3 bg-space-dark/60 rounded-lg text-center text-xs text-neon-cyan font-mono border border-neon-cyan/20 mb-2">
+                🛸 Oii, viajante das estrelas!
+            </div>
+            <a href="#aliens" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">👽 Comprar Aliens</a>
+            <a href="#acessorios" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">🧢 Acessórios</a>
+            <a href="#comidas" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">🍕 Comidas Espaciais</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">📖 Sobre os Aliens</a>
+            <a href="#planetas" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">🌍 Terra Natal</a>
+            <a href="#dicas" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-lg hover:bg-neon-green/10 hover:text-neon-green">⚡ Dicas de Cuidados</a>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-12 pb-20 overflow-hidden">
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Glow Orbs BG -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-neon-purple/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-neon-green/15 rounded-full blur-[100px] pointer-events-none"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00ff88]/40 bg-[#00ff88]/10 text-[#00ff88] font-mono text-sm mb-6 animate-bounce">
-                    <i class="ph ph-sparkle text-lg"></i>
-                    <span>Boas-vindas, viajante cósmico!</span>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                
+                <div class="text-center md:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neon-green/10 border border-neon-green/30 text-neon-green font-mono text-xs uppercase tracking-wider">
+                        <i class="ph ph-sparkle animate-spin"></i> Entrega Intergaláctica via Wormhole
+                    </div>
+
+                    <h1 class="font-orbitron font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none text-white">
+                        ADOTE SEU COMPANHEIRO <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-green via-neon-cyan to-neon-purple glow-text-green">EXTRATERRESTRE</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                        Procurando um amiguinho de 8 olhos ou uma criatura que engole buracos negros? Na <strong class="text-white">AlienMarket</strong> você encontra os seres mais adoráveis e caóticos do cosmos! 100% livres de parasitas faciais.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-2 font-orbitron">
+                        <a href="#aliens" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-neon-green to-neon-cyan text-space-darkest font-bold tracking-wider hover:opacity-90 hover:scale-105 transition-all shadow-neon-green text-center">
+                            VER CATALOGO 👽
+                        </a>
+                        <a href="#dicas" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel border border-neon-purple/40 text-neon-purple hover:text-white hover:border-neon-purple transition-all text-center">
+                            GUIA DE CUIDADOS 📖
+                        </a>
+                    </div>
+
+                    <!-- Métricas Rápidas -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-gray-800 font-orbitron">
+                        <div>
+                            <p class="text-neon-green font-bold text-2xl">4.9/5★</p>
+                            <p class="text-gray-400 text-xs">Avaliação Estelar</p>
+                        </div>
+                        <div>
+                            <p class="text-neon-purple font-bold text-2xl">100k+</p>
+                            <p class="text-gray-400 text-xs">Aliens Entregues</p>
+                        </div>
+                        <div>
+                            <p class="text-neon-cyan font-bold text-2xl">0.003s</p>
+                            <p class="text-gray-400 text-xs">Frete Teleporte</p>
+                        </div>
+                    </div>
                 </div>
-                <h1 class="font-['Orbitron'] text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
-                    Adote seu novo companheiro <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff88] via-[#00f3ff] to-[#b537f2]">Extraterrestre</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-slate-300 mb-8 leading-relaxed">
-                    Entregamos em qualquer quadrante da galáxia via buraco de minhoca expresso em até 3 segundos luz.
-                    100% livre de radiação nociva!
-                </p>
-                <div class="flex flex-wrap items-center justify-center gap-4">
-                    <a href="#aliens"
-                        class="px-8 py-4 rounded-xl font-bold bg-gradient-to-r from-[#00ff88] to-[#00f3ff] text-black shadow-[0_0_20px_rgba(0,255,136,0.5)] hover:shadow-[0_0_30px_rgba(0,255,136,0.8)] hover:scale-105 transition-all flex items-center gap-2">
-                        <i class="ph ph-rocket text-xl"></i> Ver Especies Disponíveis
-                    </a>
+
+                <!-- Ilustração Principal Hero -->
+                <div class="relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96">
+                        <!-- Orbit Rings -->
+                        <div class="absolute inset-0 rounded-full border border-dashed border-neon-green/30 animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute inset-4 rounded-full border border-neon-purple/20 animate-[spin_15s_linear_infinite_reverse]"></div>
+                        
+                        <!-- Alien Mascot Container -->
+                        <div class="w-full h-full rounded-full glass-panel flex items-center justify-center relative overflow-hidden shadow-neon-purple">
+                            <div class="text-[140px] sm:text-[180px] animate-float select-none filter drop-shadow-[0_0_20px_rgba(0,255,136,0.5)]">
+                                🛸
+                            </div>
+                            <!-- Mini floating elements -->
+                            <div class="absolute top-10 right-10 text-4xl animate-float-delayed">🪐</div>
+                            <div class="absolute bottom-12 left-8 text-3xl animate-float">⚡</div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Seção: Comprar Aliens -->
-    <section id="aliens" class="py-16 relative">
+    <!-- SEÇÃO 1: COMPRAR ALIENS -->
+    <section id="aliens" class="py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-[#b537f2]/30 pb-4">
-                <div>
-                    <h2 class="font-['Orbitron'] text-3xl font-bold flex items-center gap-3">
-                        <span class="text-[#00ff88]">👽</span> Catálogo de Aliens
-                    </h2>
-                    <p class="text-slate-400 mt-1">Espécies registradas pela Federação Galáctica</p>
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-neon-green font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-green/10 rounded-full border border-neon-green/20">Catálogo Vivo</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white">👽 ALIENS DISPONÍVEIS PARA ADOÇÃO</h2>
+                <p class="text-gray-400">Encontre o espécime perfeito para animar seu complexo habitacional. Todos vêm vacinados contra rabiola espacial!</p>
+            </div>
+
+            <!-- Cards Grid Aliens -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Alien 1 -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl bg-space-dark/80 flex items-center justify-center text-7xl mb-4 overflow-hidden border border-neon-green/20 group">
+                            <span class="group-hover:scale-125 transition-transform duration-300">👾</span>
+                            <span class="absolute top-3 right-3 text-xs bg-neon-green/20 text-neon-green px-2 py-0.5 rounded font-mono">Dócil</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-orbitron font-bold text-lg text-white">Gloop Zorp</h3>
+                            <span class="font-orbitron font-bold text-neon-green text-sm">$G 4.500</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Macia, gelatinosa e adora emitir sons de modem discado quando está feliz.</p>
+                        
+                        <div class="space-y-1.5 text-xs font-mono text-gray-300 mb-6 bg-space-dark/50 p-3 rounded-lg">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Peso:</span>
+                                <span>3.5 kg (varia se chover)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Origem:</span>
+                                <span class="text-neon-cyan">Xenon-9</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('Gloop Zorp', 4500, '👾')" class="w-full py-2.5 rounded-xl bg-neon-green/10 border border-neon-green text-neon-green hover:bg-neon-green hover:text-space-darkest font-orbitron text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-shopping-cart-simple text-base"></i> ADOTAR ALIEN
+                    </button>
                 </div>
+
+                <!-- Alien 2 -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl bg-space-dark/80 flex items-center justify-center text-7xl mb-4 overflow-hidden border border-neon-purple/20 group">
+                            <span class="group-hover:scale-125 transition-transform duration-300">🐙</span>
+                            <span class="absolute top-3 right-3 text-xs bg-neon-purple/20 text-neon-purple px-2 py-0.5 rounded font-mono">Hiperinteligente</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-orbitron font-bold text-lg text-white">Octo-Mind</h3>
+                            <span class="font-orbitron font-bold text-neon-green text-sm">$G 12.800</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Lê seus pensamentos e resolve suas equações quânticas enquanto você dorme.</p>
+                        
+                        <div class="space-y-1.5 text-xs font-mono text-gray-300 mb-6 bg-space-dark/50 p-3 rounded-lg">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Peso:</span>
+                                <span>42 kg</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Origem:</span>
+                                <span class="text-neon-purple">Nebulosa Órion</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('Octo-Mind', 12800, '🐙')" class="w-full py-2.5 rounded-xl bg-neon-green/10 border border-neon-green text-neon-green hover:bg-neon-green hover:text-space-darkest font-orbitron text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-shopping-cart-simple text-base"></i> ADOTAR ALIEN
+                    </button>
+                </div>
+
+                <!-- Alien 3 -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl bg-space-dark/80 flex items-center justify-center text-7xl mb-4 overflow-hidden border border-neon-cyan/20 group">
+                            <span class="group-hover:scale-125 transition-transform duration-300">👁️</span>
+                            <span class="absolute top-3 right-3 text-xs bg-neon-cyan/20 text-neon-cyan px-2 py-0.5 rounded font-mono">Vigilante</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-orbitron font-bold text-lg text-white">Blinky 3000</h3>
+                            <span class="font-orbitron font-bold text-neon-green text-sm">$G 2.100</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Nunca pisca. Literalmente um excelente alarme de segurança biológico.</p>
+                        
+                        <div class="space-y-1.5 text-xs font-mono text-gray-300 mb-6 bg-space-dark/50 p-3 rounded-lg">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Peso:</span>
+                                <span>800 gramas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Origem:</span>
+                                <span class="text-neon-cyan">Gliese 667Cc</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('Blinky 3000', 2100, '👁️')" class="w-full py-2.5 rounded-xl bg-neon-green/10 border border-neon-green text-neon-green hover:bg-neon-green hover:text-space-darkest font-orbitron text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-shopping-cart-simple text-base"></i> ADOTAR ALIEN
+                    </button>
+                </div>
+
+                <!-- Alien 4 -->
+                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 rounded-xl bg-space-dark/80 flex items-center justify-center text-7xl mb-4 overflow-hidden border border-neon-pink/20 group">
+                            <span class="group-hover:scale-125 transition-transform duration-300">🦖</span>
+                            <span class="absolute top-3 right-3 text-xs bg-neon-pink/20 text-neon-pink px-2 py-0.5 rounded font-mono">Pesado</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-orbitron font-bold text-lg text-white">Titanus Rex</h3>
+                            <span class="font-orbitron font-bold text-neon-green text-sm">$G 85.000</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mb-4">Exige quintal gigante. Come asteroides no café da manhã e ronca alto.</p>
+                        
+                        <div class="space-y-1.5 text-xs font-mono text-gray-300 mb-6 bg-space-dark/50 p-3 rounded-lg">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Peso:</span>
+                                <span>3.5 Toneladas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Origem:</span>
+                                <span class="text-neon-pink">Kepler-186f</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('Titanus Rex', 85000, '🦖')" class="w-full py-2.5 rounded-xl bg-neon-green/10 border border-neon-green text-neon-green hover:bg-neon-green hover:text-space-darkest font-orbitron text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="ph ph-shopping-cart-simple text-base"></i> ADOTAR ALIEN
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: ACESSÓRIOS -->
+    <section id="acessorios" class="py-20 bg-space-darker/50 relative border-t border-b border-neon-purple/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-neon-purple font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-purple/10 rounded-full border border-neon-purple/20">Moda Galáctica</span>
+                    <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white mt-2">🧢 ACESSÓRIOS & VESTUÁRIO</h2>
+                </div>
+                <p class="text-gray-400 max-w-md text-sm mt-2 md:mt-0">Deixe seu alien estiloso e protegido contra a radiação cósmica da Terra.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card Alien 1 -->
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between group">
-                    <div>
-                        <div
-                            class="relative mb-4 rounded-xl overflow-hidden bg-[#130724] border border-[#b537f2]/30 h-48 flex items-center justify-center group-hover:border-[#00ff88] transition-colors">
-                            <span
-                                class="text-7xl group-hover:scale-110 transition-transform duration-300 floating">👾</span>
-                            <span
-                                class="absolute top-3 right-3 bg-red-550/80 backdrop-blur-md text-red-300 font-mono text-xs px-2.5 py-1 rounded-full border border-red-500/40">Dócil</span>
-                        </div>
-                        <h3 class="font-['Orbitron'] text-xl font-bold mb-1">Zorblax Prime</h3>
-                        <p class="text-xs text-slate-400 mb-4 flex items-center gap-1">
-                            <i class="ph ph-[#00ff88] ph-planet"></i> Origem: <span
-                                class="text-slate-200">Xenon-9</span>
-                        </p>
-                        <div
-                            class="space-y-1.5 font-mono text-xs mb-6 bg-[#0b0517]/60 p-3 rounded-lg border border-slate-800">
-                            <div class="flex justify-between"><span class="text-slate-400">Peso:</span> <span>12.5
-                                    kg</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Dieta:</span> <span>Matéria
-                                    Escura</span></div>
-                        </div>
+                <!-- Item 1 -->
+                <div class="glass-card rounded-2xl p-4 flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-space-dark flex items-center justify-center text-4xl shrink-0 border border-neon-purple/30">
+                        🧢
                     </div>
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs text-slate-400">Preço</span>
-                            <span class="font-['Orbitron'] text-xl font-bold text-[#00ff88]">1,450 $G</span>
+                    <div class="flex-1">
+                        <h4 class="font-orbitron font-bold text-white text-sm">Touca Anti-Gravidade</h4>
+                        <p class="text-xs text-gray-400 mb-2">Impede que seu alien flutue durante o sono.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-green font-mono font-bold text-xs">$G 350</span>
+                            <button onclick="addToCart('Touca Anti-Gravidade', 350, '🧢')" class="p-1.5 rounded-lg bg-neon-purple/20 text-neon-purple hover:bg-neon-purple hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
                         </div>
-                        <button onclick="addToCart('Zorblax Prime', 1450)"
-                            class="w-full py-3 rounded-xl bg-[#b537f2]/20 hover:bg-[#00ff88] hover:text-black border border-[#b537f2] hover:border-[#00ff88] font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="ph ph-shopping-cart-simple text-lg"></i> Adotar Alien
-                        </button>
                     </div>
                 </div>
 
-                <!-- Card Alien 2 -->
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between group">
-                    <div>
-                        <div
-                            class="relative mb-4 rounded-xl overflow-hidden bg-[#130724] border border-[#b537f2]/30 h-48 flex items-center justify-center group-hover:border-[#00ff88] transition-colors">
-                            <span class="text-7xl group-hover:scale-110 transition-transform duration-300 floating"
-                                style="animation-delay: 0.5s">🛸</span>
-                            <span
-                                class="absolute top-3 right-3 bg-emerald-500/20 backdrop-blur-md text-[#00ff88] font-mono text-xs px-2.5 py-1 rounded-full border border-[#00ff88]/40">Hiperativo</span>
-                        </div>
-                        <h3 class="font-['Orbitron'] text-xl font-bold mb-1">Gloop-Gloop</h3>
-                        <p class="text-xs text-slate-400 mb-4 flex items-center gap-1">
-                            <i class="ph ph-planet text-[#00ff88]"></i> Origem: <span class="text-slate-200">Nebulosa de
-                                Órion</span>
-                        </p>
-                        <div
-                            class="space-y-1.5 font-mono text-xs mb-6 bg-[#0b0517]/60 p-3 rounded-lg border border-slate-800">
-                            <div class="flex justify-between"><span class="text-slate-400">Peso:</span> <span>3.2 kg
-                                    (Líquido)</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Dieta:</span> <span>Baterias
-                                    9V</span></div>
-                        </div>
+                <!-- Item 2 -->
+                <div class="glass-card rounded-2xl p-4 flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-space-dark flex items-center justify-center text-4xl shrink-0 border border-neon-purple/30">
+                        🧥
                     </div>
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs text-slate-400">Preço</span>
-                            <span class="font-['Orbitron'] text-xl font-bold text-[#00ff88]">890 $G</span>
+                    <div class="flex-1">
+                        <h4 class="font-orbitron font-bold text-white text-sm">Blusa Térmica Plasma</h4>
+                        <p class="text-xs text-gray-400 mb-2">Mantém o corpo aquecido em até -200°C.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-green font-mono font-bold text-xs">$G 890</span>
+                            <button onclick="addToCart('Blusa Térmica Plasma', 890, '🧥')" class="p-1.5 rounded-lg bg-neon-purple/20 text-neon-purple hover:bg-neon-purple hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
                         </div>
-                        <button onclick="addToCart('Gloop-Gloop', 890)"
-                            class="w-full py-3 rounded-xl bg-[#b537f2]/20 hover:bg-[#00ff88] hover:text-black border border-[#b537f2] hover:border-[#00ff88] font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="ph ph-shopping-cart-simple text-lg"></i> Adotar Alien
-                        </button>
                     </div>
                 </div>
 
-                <!-- Card Alien 3 -->
-                <div class="glass-card rounded-2xl p-5 flex flex-col justify-between group">
-                    <div>
-                        <div
-                            class="relative mb-4 rounded-xl overflow-hidden bg-[#130724] border border-[#b537f2]/30 h-48 flex items-center justify-center group-hover:border-[#00ff88] transition-colors">
-                            <span class="text-7xl group-hover:scale-110 transition-transform duration-300 floating"
-                                style="animation-delay: 1s">🤖</span>
-                            <span
-                                class="absolute top-3 right-3 bg-amber-500/20 backdrop-blur-md text-amber-300 font-mono text-xs px-2.5 py-1 rounded-full border border-amber-500/40">Calmo</span>
-                        </div>
-                        <h3 class="font-['Orbitron'] text-xl font-bold mb-1">Xenomorph-Lite</h3>
-                        <p class="text-xs text-slate-400 mb-4 flex items-center gap-1">
-                            <i class="ph ph-planet text-[#00ff88]"></i> Origem: <span class="text-slate-200">LV-426
-                                Mini</span>
-                        </p>
-                        <div
-                            class="space-y-1.5 font-mono text-xs mb-6 bg-[#0b0517]/60 p-3 rounded-lg border border-slate-800">
-                            <div class="flex justify-between"><span class="text-slate-400">Peso:</span> <span>45.0
-                                    kg</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Dieta:</span> <span>Biscoito
-                                    Ácido</span></div>
+                <!-- Item 3 -->
+                <div class="glass-card rounded-2xl p-4 flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-space-dark flex items-center justify-center text-4xl shrink-0 border border-neon-purple/30">
+                        👖
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-orbitron font-bold text-white text-sm">Calças Cósmicas 4D</h4>
+                        <p class="text-xs text-gray-400 mb-2">Ajusta-se automaticamente a qualquer nº de pernas.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-green font-mono font-bold text-xs">$G 1.200</span>
+                            <button onclick="addToCart('Calças Cósmicas 4D', 1200, '👖')" class="p-1.5 rounded-lg bg-neon-purple/20 text-neon-purple hover:bg-neon-purple hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
                         </div>
                     </div>
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs text-slate-
+                </div>
+
+                <!-- Item 4 -->
+                <div class="glass-card rounded-2xl p-4 flex gap-4 items-center">
+                    <div class="w-20 h-20 rounded-xl bg-space-dark flex items-center justify-center text-4xl shrink-0 border border-neon-purple/30">
+                        👟
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-orbitron font-bold text-white text-sm">Tênis Flutuante Pro</h4>
+                        <p class="text-xs text-gray-400 mb-2">Caminhe sem tocar no solo terrestre irritante.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-neon-green font-mono font-bold text-xs">$G 1.550</span>
+                            <button onclick="addToCart('Tênis Flutuante Pro', 1550, '👟')" class="p-1.5 rounded-lg bg-neon-purple/20 text-neon-purple hover:bg-neon-purple hover:text-white transition-colors">
+                                <i class="ph ph-plus font-bold"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: COMIDAS ESPACIAIS -->
+    <section id="comidas" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-neon-cyan font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-cyan/10 rounded-full border border-neon-cyan/20">Gastronomia Quântica</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white">🍕 COMIDAS & IGUARIAS ESPACIAIS</h2>
+                <p class="text-gray-400">Nutrição de alta energia para manter os órgãos secundários e terceirizados do seu alien saudáveis!</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Food 1 -->
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-space-dark flex items-center justify-center text-5xl mb-4 border border-neon-cyan/30 shadow-neon-cyan/20">
+                        🍕
+                    </div>
+                    <h3 class="font-orbitron font-bold text-white text-base">Pizza de Matéria Escura</h3>
+                    <p class="text-xs text-gray-400 my-2">Sabor irresistível que dobra a gravidade no seu estômago.</p>
+                    <span class="inline-block font-orbitron font-bold text-neon-green text-sm mb-4">$G 180</span>
+                    <button onclick="addToCart('Pizza de Matéria Escura', 180, '🍕')" class="w-full py-2 rounded-lg bg-neon-cyan/10 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-space-darkest font-orbitron text-xs font-bold transition-all">
+                        COMPRAR SNACK
+                    </button>
+                </div>
+
+                <!-- Food 2 -->
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-space-dark flex items-center justify-center text-5xl mb-4 border border-neon-cyan/30 shadow-neon-cyan/20">
+                        🧪
+                    </div>
+                    <h3 class="font-orbitron font-bold text-white text-base">Elixir de Raio Gama</h3>
+                    <p class="text-xs text-gray-400 my-2">Bebida energética radioativa (500ml). Faz os olhos brilharem.</p>
+                    <span class="inline-block font-orbitron font-bold text-neon-green text-sm mb-4">$G 95</span>
+                    <button onclick="addToCart('Elixir de Raio Gama', 95, '🧪')" class="w-full py-2 rounded-lg bg-neon-cyan/10 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-space-darkest font-orbitron text-xs font-bold transition-all">
+                        COMPRAR SNACK
+                    </button>
+                </div>
+
+                <!-- Food 3 -->
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-space-dark flex items-center justify-center text-5xl mb-4 border border-neon-cyan/30 shadow-neon-cyan/20">
+                        🍔
+                    </div>
+                    <h3 class="font-orbitron font-bold text-white text-base">Hambúrguer Nebuloso</h3>
+                    <p class="text-xs text-gray-400 my-2">Feito com proteína reconstituída de supernovas distantes.</p>
+                    <span class="inline-block font-orbitron font-bold text-neon-green text-sm mb-4">$G 240</span>
+                    <button onclick="addToCart('Hambúrguer Nebuloso', 240, '🍔')" class="w-full py-2 rounded-lg bg-neon-cyan/10 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-space-darkest font-orbitron text-xs font-bold transition-all">
+                        COMPRAR SNACK
+                    </button>
+                </div>
+
+                <!-- Food 4 -->
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <div class="w-24 h-24 mx-auto rounded-full bg-space-dark flex items-center justify-center text-5xl mb-4 border border-neon-cyan/30 shadow-neon-cyan/20">
+                        🍪
+                    </div>
+                    <h3 class="font-orbitron font-bold text-white text-base">Cookies de Poeira Estelar</h3>
+                    <p class="text-xs text-gray-400 my-2">Crocantes e recheados com gotas de antimatéria suave.</p>
+                    <span class="inline-block font-orbitron font-bold text-neon-green text-sm mb-4">$G 110</span>
+                    <button onclick="addToCart('Cookies de Poeira Estelar', 110, '🍪')" class="w-full py-2 rounded-lg bg-neon-cyan/10 border border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-space-darkest font-orbitron text-xs font-bold transition-all">
+                        COMPRAR SNACK
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 4: DICAS E CUIDADOS (EM DESTAQUE) -->
+    <section id="dicas" class="py-20 relative bg-space-dark/80 border-t border-b border-neon-green/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-neon-green font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-green/10 rounded-full border border-neon-green/20">Manual do Tutor</span>
+                    <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white">⚡ DICAS & CUIDADOS ESSENCIAIS</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        Manter um alienígena em um apartamento terrestre exige responsabilidade e alguns cuidados para evitar a destruição do continuum espaço-tempo da sua sala de estar.
+                    </p>
+                    <div class="p-4 rounded-xl bg-neon-pink/10 border border-neon-pink/30 text-neon-pink text-xs font-mono">
+                        ⚠️ <strong>ALERTA DE SEGURANÇA:</strong> Em caso de fusão nuclear espontânea do seu pet, ligue imediatamente para o Protocolo 99-X.
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+                    
+                    <div class="glass-panel p-5 rounded-xl space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-neon-green/20 text-neon-green flex items-center justify-center text-xl font-bold">1</div>
+                        <h4 class="font-orbitron font-bold text-white text-base">Não Molhe Após Meia-Noite Estelar</h4>
+                        <p class="text-xs text-gray-400">A água da Terra pode engatilhar clonagem involuntária ou mutações com tentacles extras.</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-neon-purple/20 text-neon-purple flex items-center justify-center text-xl font-bold">2</div>
+                        <h4 class="font-orbitron font-bold text-white text-base">Banho de Luz UV 24h</h4>
+                        <p class="text-xs text-gray-400">Eles realizam fotossíntese de radiação. Deixe-os perto de lâmpadas UV ou micro-ondas abertos.</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-neon-cyan/20 text-neon-cyan flex items-center justify-center text-xl font-bold">3</div>
+                        <h4 class="font-orbitron font-bold text-white text-base">Evite Wi-Fi 5GHz Perto Deles</h4>
+                        <p class="text-xs text-gray-400">Frequências de Wi-Fi causam soluçados psíquicos que fazem objetos flutuarem sem querer.</p>
+                    </div>
+
+                    <div class="glass-panel p-5 rounded-xl space-y-2">
+                        <div class="w-10 h-10 rounded-lg bg-neon-pink/20 text-neon-pink flex items-center justify-center text-xl font-bold">4</div>
+                        <h4 class="font-orbitron font-bold text-white text-base">Carinho na Terceira Cabeça</h4>
+                        <p class="text-xs text-gray-400">A maioria das espécies adora afago, mas certifique-se de qual cabeça é a receptiva a afeto.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 5: SOBRE OS ALIENS & CURIOSIDADES -->
+    <section id="sobre" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-neon-purple font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-purple/10 rounded-full border border-neon-purple/20">Enciclopédia Galáctica</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white">📖 SOBRE AS ESPÉCIES</h2>
+                <p class="text-gray-400">Fatos fascinantes comprovados pelo Instituto de Zoologia Cósmica.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="font-orbitron font-bold text-white text-lg mb-2">Comunicação Telepática</h3>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        A maioria das espécies catalogadas na AlienMarket não possui cordas vocais. Eles transmitem pensamentos diretamente para seu cérebro — geralmente pedindo petiscos às 3 da manhã.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="text-4xl mb-4">💤</div>
+                    <h3 class="font-orbitron font-bold text-white text-lg mb-2">Sono em Fase Quântica</h3>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Quando dormem, alguns aliens entram em estado de superposição quântica: eles estão simultaneamente na cama e flutuando no teto do banheiro até o despertador tocar.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden">
+                    <div class="text-4xl mb-4">❤️</div>
+                    <h3 class="font-orbitron font-bold text-white text-lg mb-2">Lealdade Incondicional</h3>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Uma vez que um alienígena reconhece você como seu tutor humano, ele defenderá sua casa contra invasões de ladrões ou de frotas alienígenas rivais com igual ferocidade!
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEÇÃO 6: TERRA NATAL / PLANETAS ORIGEM -->
+    <section id="planetas" class="py-20 bg-space-darker/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-neon-cyan font-mono text-xs uppercase tracking-widest px-3 py-1 bg-neon-cyan/10 rounded-full border border-neon-cyan/20">Destinos de Origem</span>
+                <h2 class="font-orbitron font-black text-3xl sm:text-4xl text-white">🌍 PLANETAS NATAL</h2>
+                <p class="text-gray-400">Conheça os ecossistemas exóticos de onde nossos amiguinhos vêm!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Planeta 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-purple-900 via-space-dark to-neon-green/20 flex items-center justify-center relative">
+                        <div class="text-8xl group-hover:scale-110 transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(0,255,136,0.4)]">🪐</div>
+                        <span class="absolute bottom-3 left-3 bg-space-darkest/80 text-neon-green text-xs font-mono px-3 py-1 rounded-full border border-neon-green/30">Setor Alfa</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-orbitron font-bold text-xl text-white">Xenon-9</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Um mundo coberto por oceanos de néon líquido e florestas bioluminescentes. A gravidade lá é 30% mais leve que na Terra.
+                        </p>
+                        <div class="pt-2 text-[11px] font-mono text-neon-cyan">Clima: Chuva de Diamantes Suave</div>
+                    </div>
+                </div>
+
+                <!-- Planeta 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-indigo-900 via-space-dark to-neon-purple/30 flex items-center justify-center relative">
+                        <div class="text-8xl group-hover:scale-110 transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(181,55,242,0.4)]">🌌</div>
+                        <span class="absolute bottom-3 left-3 bg-space-darkest/80 text-neon-purple text-xs font-mono px-3 py-1 rounded-full border border-neon-purple/30">Nebulosa Profunda</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-orbitron font-bold text-xl text-white">Nebulosa de Órion</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Bérçario estelar onde os seres são feitos de pura energia condensada e poeira cósmica colorida.
+                        </p>
+                        <div class="pt-2 text-[11px] font-mono text-neon-purple">Clima: Aurora Boreal Permanente</div>
+                    </div>
+                </div>
+
+                <!-- Planeta 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-gradient-to-br from-blue-900 via-space-dark to-neon-cyan/20 flex items-center justify-center relative">
+                        <div class="text-8xl group-hover:scale-110 transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(0,243,255,0.4)]">🌑</div>
+                        <span class="absolute bottom-3 left-3 bg-space-darkest/80 text-neon-cyan text-xs font-mono px-3 py-1 rounded-full border border-neon-cyan/30">Sistema Gliese</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="font-orbitron font-bold text-xl text-white">Gliese 667Cc</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            Super-Terra rochosa com três sóis no céu. Berço das espécies mais resistentes e de olhos múltiplos.
+                        </p>
+                        <div class="pt-2 text-[11px] font-mono text-neon-green">Clima: Triplo Pôr do Sol Quente</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-space-darkest border-t border-neon-green/20 pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <div class="space-y-4 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🛸</span>
+                        <span class="font-orbitron font-black text-lg text-white">ALIEN<span class="text-neon-green">MARKET</span></span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        A primeira e única rede de adoção e suprimentos extraterrestres com licença da Federação Galáctica.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold text-white text-sm mb-4 text-neon-green">NAVEGAÇÃO</h4>
+                    <ul class="space-y-2 text-xs text-gray-400 font-mono">
+                        <li><a href="#aliens" class="hover:text-neon-green transition-colors">Catalogar Aliens</a></li>
+                        <li><a href="#acessorios" class="hover:text-neon-green transition-colors">Moda Espacial</a></li>
+                        <li><a href="#comidas" class="hover:text-neon-green transition-colors">Ração de Antimatéria</a></li>
+                        <li><a href="#dicas" class="hover:text-neon-green transition-colors">Guia de Sobrevivência</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold text-white text-sm mb-4 text-neon-purple">AVISOS LEGAIS</h4>
+                    <ul class="space-y-2 text-xs text-gray-400 font-mono">
+                        <li><a href="#" class="hover:text-neon-purple transition-colors">Termos de Teleporte</a></li>
+                        <li><a href="#" class="hover:text-neon-purple transition-colors">Política de Não-Invasão</a></li>
+                        <li><a href="#" class="hover:text-neon-purple transition-colors">Garantia Anti-Abdução</a></li>
+                        <li><a href="#" class="hover:text-neon-purple transition-colors">Protocolo MIB</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-orbitron font-bold text-white text-sm mb-4 text-neon-cyan">CONTATO ESPACIAL</h4>
+                    <p class="text-xs text-gray-400 font-mono mb-2">Frequência Sub-Espacial:</p>
+                    <p class="text-xs text-neon-cyan font-mono mb-4">1420.405 MHz (Sinal Wow!)</p>
+                    <div class="flex gap-3 text-lg">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-space-dark border border-neon-cyan/30 text-neon-cyan flex items-center justify-center hover:bg-neon-cyan hover:text-space-darkest transition-all"><i class="ph ph-planet"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-space-dark border border-neon-cyan/30 text-neon-cyan flex items-center justify-center hover:bg-neon-cyan hover:text-space-darkest transition-all"><i class="ph ph-discord-logo"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-space-dark border border-neon-cyan/30 text-neon-cyan flex items-center justify-center hover:bg-neon-cyan hover:text-space-darkest transition-all"><i class="ph ph-telegram-logo"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 font-mono gap-4">
+                <p>© 2026 AlienMarket Corp. Todos os direitos reservados no Quadrante 4.</p>
+                <p class="text-center sm:text-right">Desenvolvido com 💚 & Poeira Estelar para humanos e aliens.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DO CARRINHO (SIMULAÇÃO DE COMPRA) -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-neon-green/40 p-6 relative animate-scaleUp">
+            
+            <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-neon-green/20 text-neon-green flex items-center justify-center text-2xl">
+                    🛒
+                </div>
+                <div>
+                    <h3 class="font-orbitron font-bold text-white text-lg">Seu Carrinho Cósmico</h3>
+                    <p class="text-xs text-gray-400 font-mono">Pronto para o teleporte de entrega</p>
+                </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            <div id="cart-items" class="space-y-3 max-h-60 overflow-y-auto pr-1 mb-6">
+                <p class="text-center text-gray-500 text-xs py-8 font-mono">Seu carrinho está vazio como o vácuo do espaço...</p>
+            </div>
+
+            <!-- Total -->
+            <div class="border-t border-gray-800 pt-4 mb-6 flex justify-between items-center font-orbitron">
+                <span class="text-gray-400 text-sm">TOTAL:</span>
+                <span id="cart-total" class="text-neon-green font-bold text-xl">$G 0</span>
+            </div>
+
+            <button onclick="checkout()" class="w-full py-3 rounded-xl bg-gradient-to-r from-neon-green to-neon-cyan text-space-darkest font-orbitron font-bold text-sm hover:opacity-90 transition-opacity shadow-neon-green">
+                FINALIZAR PEDIDO VIA TELEPORTE 🛸
+            </button>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÃO TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 glass-panel border border-neon-green text-white px-5 py-3 rounded-xl flex items-center gap-3 shadow-neon-green">
+        <span id="toast-icon" class="text-2xl">✨</span>
+        <div>
+            <h5 id="toast-title" class="font-orbitron font-bold text-xs text-neon-green">Adicionado!</h5>
+            <p id="toast-msg" class="text-xs text-gray-300">Item colocado na nave de entrega.</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT DE INTERAÇÃO -->
+    <script>
+        // Estado do Carrinho
+        let cart = [];
+
+        // Adicionar ao Carrinho
+        function addToCart(name, price, icon) {
+            cart.push({ name, price, icon });
+            updateCartUI();
+            showToast("Item Adicionado!", `${name} adicionado ao seu lote estelar!`, icon);
+        }
+
+        // Atualizar Interface do Carrinho
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            cartCount.innerText = cart.length;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `<p class="text-center text-gray-500 text-xs py-8 font-mono">Seu carrinho está vazio como o vácuo do espaço...</p>`;
+                cartTotal.innerText = `$G 0`;
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="flex items-center justify-between p-3 bg-space-dark/60 rounded-xl border border-gray-800">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">${item.icon}</span>
+                            <div>
+                                <h5 class="font-orbitron text-xs font-bold text-white">${item.name}</h5>
+                                <span class="text-neon-green font-mono text-[11px]">$G ${item.price.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-neon-pink text-sm">
+                            <i class="ph ph-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            cartItems.innerHTML = html;
+            cartTotal.innerText = `$G ${total.toLocaleString()}`;
+        }
+
+        // Remover do Carrinho
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Toggle Modal
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Toggle Menu Mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Checkout Simulado
+        function checkout() {
+            if (cart.length === 0) {
+                showToast("Carrinho Vazio", "Adicione algum alien ou item antes!", "⚠️");
+                return;
+            }
+            
+            toggleCartModal();
+            cart = [];
+            updateCartUI();
+            
+            showToast("SUCESSO GALÁCTICO!", "Seus itens estão sendo teleportados para seu quintal!", "🛸");
+        }
+
+        // Exibir Toast Notificação
+        function showToast(title, msg, icon = "✨") {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerText = msg;
+            document.getElementById('toast-icon').innerText = icon;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
